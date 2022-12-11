@@ -1,10 +1,20 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import first from "../assests/1 (1).jpeg";
 import second from "../assests/1 (2).jpeg";
 import third from "../assests/1 (5).jpeg";
+import {db} from "../firebase"
 import Cards from "./Cards";
+import FinalCard from "./FinalCard";
 
 function Crouseal() {
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    db.collection("blogs")
+      .orderBy("timestamp", "desc").limit(3).onSnapshot((snapshot) => {
+        setBlogs(snapshot.docs.map((doc) => doc.data()));
+      });
+  }, []);
   return (
     <div>
       <div
@@ -129,13 +139,9 @@ function Crouseal() {
           to discover and stay inspired. Check back weekly to see what’s new.
         </p>
         <p className="text-center">
-          <a
-            href="/hello"
-            className="btn btn-secondary"
-            style={{ "text-align": "center" }}
-          >
+        <Link className="btn btn-secondary" to="/gallery">
             See Gallery
-          </a>
+          </Link>
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap">
           <img
@@ -184,76 +190,25 @@ function Crouseal() {
           member to list your Resources in the Hub.
         </p>
         <p className="text-center">
-          <a
-            href="/hello"
-            className="btn btn-secondary"
-            style={{ "text-align": "center" }}
-          >
-            See Blogs
-          </a>
+        <Link className="btn btn-secondary" to="/blogs">
+            Explore Blogs
+          </Link>
         </p>
-        <div className="d-flex align-items-center justify-content-center flex-wrap">
-          <div class="card mx-2" style={{ width: "18rem" }}>
-            <img
-              src="https://dvyvvujm9h0uq.cloudfront.net/com/articles/1572946445-commercial-photography1.jpg"
-              class="card-img-top"
-              alt="..."
+        <div className="container d-flex align-items-center justify-content-center flex-wrap">
+        {
+          blogs.map(({uid, description, displayName, img, photoURL, timestamp, title})=>(
+            <FinalCard 
+            key={uid}
+            title={title}
+            description={description}
+            src={img}
+            photoURL={photoURL}
+            displayName={displayName}
+            timestamp={timestamp}
             />
-            <div class="card-body">
-              <h5 class="card-title">
-                Learn about the process that I used to capture
-              </h5>
-              <p class="card-text">
-                500px Brand Ambassador. Travel photographer based in Boise,
-                Idaho. Specializing in lifestyle, landscape, and commercial
-                photography.
-              </p>
-              <a href="#" class="btn btn-primary">
-                Read More
-              </a>
-            </div>
-          </div>
-          <div class="card mx-2" style={{ width: "18rem" }}>
-            <img
-              src="https://dvyvvujm9h0uq.cloudfront.net/com/articles/1572946445-commercial-photography1.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">
-                Learn about the process that I used to capture
-              </h5>
-              <p class="card-text">
-                500px Brand Ambassador. Travel photographer based in Boise,
-                Idaho. Specializing in lifestyle, landscape, and commercial
-                photography.
-              </p>
-              <a href="#" class="btn btn-primary">
-                Read More
-              </a>
-            </div>
-          </div>
-          <div class="card mx-2" style={{ width: "18rem" }}>
-            <img
-              src="https://dvyvvujm9h0uq.cloudfront.net/com/articles/1572946445-commercial-photography1.jpg"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h5 class="card-title">
-                Learn about the process that I used to capture
-              </h5>
-              <p class="card-text">
-                500px Brand Ambassador. Travel photographer based in Boise,
-                Idaho. Specializing in lifestyle, landscape, and commercial
-                photography.
-              </p>
-              <a href="#" class="btn btn-primary">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
+          ))
+        }
+      </div>
       </div>
       <div
         className="mt-4"

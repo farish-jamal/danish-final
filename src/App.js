@@ -15,10 +15,14 @@ import Footer from "./components/Footer"
 import {useAuthState} from "react-firebase-hooks/auth"
 import { auth } from './firebase';
 import SignIn from './components/SigIn';
+import BlogPost from './components/blogPost';
+import ContestPost from './components/ContestPost';
+import EquipmentPost from './components/EquipmentPost';
 
 function App() {
   
   const [user] = useAuthState(auth);
+  console.log(user);
   return (
     <div className="App">
       <BrowserRouter>
@@ -31,6 +35,9 @@ function App() {
       <Route path="/contest" element={user? <Contest user={user}/> : <SignIn />} />
       <Route path="/equipment" element={user? <Equipments user={user}/> : <SignIn />} />
       <Route path="/blogs" element={user? <Blogs user={user}/> : <SignIn />} />
+      <Route path="/blogpost" element={user? <BlogPost user={user}/> : <SignIn />} />
+      <Route path="/equipmentpost" element={user? <EquipmentPost user={user}/> : <SignIn />} />
+      <Route path="/contestpost" element={user? <ContestPost user={user}/> : <SignIn />} />
       </Routes>
       </BrowserRouter>
       <Footer />
