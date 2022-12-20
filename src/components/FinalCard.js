@@ -11,7 +11,7 @@ function FinalCard({uid, description, displayName, src, photoURL, timestamp, tit
             <img src={src} className="card-img-top" alt="..." style={{"height": "300px"}}/>
         </div>
         <div className="card-body">
-          <h5 className="card-title text-justify" style={{fontWeight: 600}}>{truncate(title, 40)}{" "}</h5>
+          <h5 className="card-title text-justify" style={{fontWeight: 500}}>{truncate(title, 40)}{" "}</h5>
           <p className="card-text" style={{ textAlign: "justify"}}>
           {description}
           </p>
