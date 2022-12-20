@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { db, auth } from "../firebase";
 import firebase from 'firebase/compat/app';
 import Header from './Header';
+import LoadingBar from 'react-top-loading-bar'
 
 const EquipmentPost = ({user}) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [img, setImg] = useState("");
     const [alink, setAlink] = useState("");
+    const [progress, setProgress] = useState(0);
     const [flink, setFlink] = useState("");
     async function handleSubmit(e) {
         e.preventDefault();
         const { uid, photoURL, displayName } = auth.currentUser;
+        setProgress(30)
         await db.collection("equipments").add({
           title: title,
           description: description,
@@ -24,13 +27,21 @@ const EquipmentPost = ({user}) => {
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
         setTitle("");
+        setProgress(70)
         setDescription("");
         setImg("");
-        alert("Equipment Posted")
+        setFlink("");
+        setAlink("")
+        setProgress(100)
       }
     return (
         <>
         <Header user={user}/>
+        <LoadingBar
+        color='#f11946'
+        progress={progress}
+       height={3}
+      />
         <div className="container" style={{"height": "70vh"}}>
             <h1 className="text-center my-4">Post blog About Equipments</h1>
             <form onSubmit={handleSubmit}>

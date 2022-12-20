@@ -2,9 +2,11 @@ import React,{useEffect, useState} from 'react'
 import Header from './Header'
 import {db} from "../firebase"
 import FinalCard from './FinalCard';
+import LoadingBar from 'react-top-loading-bar'
 
 function Contest({user}) {
   const [contest, setContest] = useState([]);
+  const [progress, setProgress] = useState(100);
   useEffect(() => {
     db.collection("contest")
       .orderBy("timestamp", "desc").onSnapshot((snapshot) => {
@@ -15,6 +17,11 @@ function Contest({user}) {
   return (
     <div>
       <Header user={user}/>
+      <LoadingBar
+        color='#f11946'
+        progress={progress}
+       height={3}
+      />
       <div className="container d-flex align-items-center justify-content-center flex-wrap">
         {
           contest.map(({uid, description, displayName, img, photoURL, timestamp, title})=>(

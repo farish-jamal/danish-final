@@ -6,19 +6,21 @@ function FinalCard({uid, description, displayName, src, photoURL, timestamp, tit
       }
   return (
     <div>
-        <div className="card mx-1 my-4" style={{width: "18rem"}}>
-        <img src={src} className="card-img-top" alt="..." style={{"height": "150px"}}/>
+        <div className="card mx-1 my-4" style={{width: "100%", height: "90vh", overflowX:"hidden",overflowY: "scroll"}}>
+        <div className='d-flex'>
+            <img src={src} className="card-img-top" alt="..." style={{"height": "300px"}}/>
+        </div>
         <div className="card-body">
           <h5 className="card-title text-justify" style={{fontWeight: 600}}>{truncate(title, 40)}{" "}</h5>
           <p className="card-text" style={{ textAlign: "justify"}}>
-          {truncate(description, 180)}{" "}
+          {description}
           </p>
         </div>
         <div className='d-flex align-items-center justify-content-between mx-3 mb-2'>
-            <button className='btn btn-primary'>Read Blog</button>
-            <div className='d-flex align-items-center justify-content-between' style={{"flexDirection": "column"}}>
-                <img src={photoURL} className="card" alt="..." style={{"height": "30px", "borderRadius": "50%"}}/>
-                <p style={{"fontSize": "13px"}}>{displayName}</p>
+            {/* <p style={{"fontSize": "16px", marginRight: "10px", "fontWeight": "bolder"}}>Published By - {timestamp}</p> */}
+            <div className='d-flex align-item-center justify-content-between mx-2'>
+                <p style={{"fontSize": "16px", marginRight: "10px", "fontWeight": "bolder"}}>Published By - {displayName}</p>
+                <img src={photoURL} alt="..." style={{"height": "30px", "borderRadius": "50%"}}/>
             </div>
         </div>
       </div>

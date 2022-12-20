@@ -6,6 +6,12 @@ import third from "../assests/1 (5).jpeg";
 import {db} from "../firebase"
 import Cards from "./Cards";
 import FinalCard from "./FinalCard";
+import g7 from "../assests/gal-1 (8).jpeg"
+import g8 from "../assests/gal-1 (9).jpeg"
+import g9 from "../assests/gal-1 (10).jpeg"
+import g10 from "../assests/gal-1 (11).jpeg"
+import g11 from "../assests/gal-1 (12).jpeg"
+import g12 from "../assests/gal-1 (5).jpeg"
 
 function Crouseal() {
   const [blogs, setBlogs] = useState([]);
@@ -145,37 +151,37 @@ function Crouseal() {
         </p>
         <div className="d-flex align-items-center justify-content-center flex-wrap">
           <img
-            src={first}
+            src={g10}
             className="mx-2 my-2"
             alt="..."
             style={{ width: "300px" }}
           />
           <img
-            src={first}
+            src={g9}
             className="mx-2 my-2"
             alt="..."
             style={{ width: "300px" }}
           />
           <img
-            src={first}
+            src={g11}
             className="mx-2 my-2"
             alt="..."
             style={{ width: "300px" }}
           />
           <img
-            src={first}
+            src={g12}
             className="mx-2 my-2"
             alt="..."
             style={{ width: "300px" }}
           />
           <img
-            src={first}
+            src={g7}
             className="mx-2 my-2"
             alt="..."
             style={{ width: "300px" }}
           />
           <img
-            src={first}
+            src={g8}
             className="mx-2 my-2"
             alt="..."
             style={{ width: "300px" }}
